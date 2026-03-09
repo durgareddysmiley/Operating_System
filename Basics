@@ -94,3 +94,74 @@ A process is simply a program that is currently running.
 
 A program sitting in storage (disk) is just passive code.
 When the OS loads that program into memory and starts executing it, it becomes a process.
+
+##MY DOUBT 
+I DIDNT UNDERSTAND OS LOADS THE PROGRAM INTO MEMORY  AND ALSO SAYING OS ALLOCATES MEMORY TO PROGRAM WHAT IS TRYE
+
+Both statements are true. They describe two steps of the same thing, but beginners think they are different. They are not.
+
+Let’s walk through it logically.
+
+Step-by-step: what happens when you run a program
+
+Suppose you open Google Chrome.
+
+Step 1 — Program is on disk
+
+Chrome is stored on your hard disk / SSD as a file.
+
+At this stage it is just a program, not a process.
+
+Disk → chrome.exe
+Step 2 — OS allocates memory
+
+When you double-click Chrome:
+
+The Operating System decides how much RAM Chrome can use.
+
+Example:
+
+Total RAM = 8 GB
+Chrome gets = 2 GB
+
+This step is called memory allocation.
+
+The OS reserves part of RAM for the program.
+
+Step 3 — OS loads program into memory
+
+Now the OS copies the program from disk into that RAM space.
+
+Disk → RAM
+
+This is called loading the program into memory.
+
+Step 4 — CPU starts executing
+
+Once the program is in RAM, the CPU executes the instructions.
+
+Now Chrome becomes a process.
+
+So the full flow is
+Program on disk
+      ↓
+OS allocates RAM
+      ↓
+OS loads program into RAM
+      ↓
+CPU executes program
+      ↓
+Program becomes a process
+Example 1 — Opening Word
+
+You open Microsoft Word.
+
+What OS does:
+
+Allocate RAM for Word
+
+Load Word program into RAM
+
+CPU starts executing Word
+
+Now Word is a running process.
