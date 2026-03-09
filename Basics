@@ -166,3 +166,8 @@ Load Word program into RAM
 CPU starts executing Word
 
 Now Word is a running process.
+
+## PROCESS CONTROL BLOCK
+
+CONTEXT = PROPERTIES 
+IT STORES ALL THE PROCESS PROPERTIES AND ATTRIBUTES 
