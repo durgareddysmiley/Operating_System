@@ -90,6 +90,7 @@ Two programs try to use the same RAM location → system crash.
 That is system software managing hardware resources.
 
 ## PROCESS 
+PROCESS IS ENTITY  IT IS CREATED BY OS TO EXECUTE THE PROGRAM 
 A process is simply a program that is currently running.
 
 A program sitting in storage (disk) is just passive code.
