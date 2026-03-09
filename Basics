@@ -88,3 +88,9 @@ Example 2
 Two programs try to use the same RAM location → system crash.
 
 That is system software managing hardware resources.
+
+## PROCESS 
+A process is simply a program that is currently running.
+
+A program sitting in storage (disk) is just passive code.
+When the OS loads that program into memory and starts executing it, it becomes a process.
