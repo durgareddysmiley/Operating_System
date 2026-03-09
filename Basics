@@ -91,7 +91,7 @@ That is system software managing hardware resources.
 
 ## PROCESS 
 PROCESS IS ENTITY  IT IS CREATED BY OS TO EXECUTE THE PROGRAM 
-A process is simply a program that is currently running.
+A process is simply a program that is currently running. 
 
 A program sitting in storage (disk) is just passive code.
 When the OS loads that program into memory and starts executing it, it becomes a process.
@@ -171,3 +171,209 @@ Now Word is a running process.
 
 CONTEXT = PROPERTIES 
 IT STORES ALL THE PROCESS PROPERTIES AND ATTRIBUTES 
+
+## PROPERTIES OF PROCESS 
+1. Process ID (PID)
+
+Every process has a unique number assigned by the OS.
+
+Purpose: Identify and manage the process.
+
+Example 1
+You run a Python program.
+
+python script.py
+
+OS assigns PID like 4521.
+
+Example 2
+Open Chrome and VS Code.
+
+Chrome → PID 3200
+VS Code → PID 3278
+
+Both are different processes.
+
+2. Process State
+
+A process is always in some state.
+
+Common states:
+
+New
+Ready
+Running
+Waiting
+Terminated
+
+Example 1
+Program waiting for CPU → Ready state
+
+Example 2
+Program waiting for file input → Waiting state
+
+3. Program Counter
+
+This stores the address of the next instruction to execute.
+
+Without this, the CPU wouldn’t know where to continue execution.
+
+Example 1
+
+Instruction 1
+Instruction 2
+Instruction 3
+
+Program counter tells CPU:
+next execute Instruction 2
+
+Example 2
+When context switching happens, OS saves the program counter so execution can resume later.
+
+4. CPU Registers
+
+Registers store temporary execution data.
+
+Examples:
+
+accumulator
+
+index registers
+
+stack pointer
+
+Example 1
+During calculation:
+
+a = b + c
+
+Values stored temporarily in registers.
+
+Example 2
+While switching processes, OS saves register values so the process can continue correctly later.
+
+5. Memory Information
+
+OS tracks what memory belongs to the process.
+
+Includes:
+
+code section
+
+data section
+
+stack
+
+heap
+
+Example 1
+A C program uses stack for function calls.
+
+Example 2
+Dynamic memory (malloc) is stored in heap.
+
+6. I/O Status Information
+
+OS tracks what input/output devices the process is using.
+
+Example 1
+Process reading a file from disk.
+
+Example 2
+Process sending data to printer.
+
+OS must track these devices so multiple processes don't conflict.
+
+## STATES OF PROCESS 
+1. New
+
+The process is being created.
+
+Example 1
+You double-click a program → OS starts creating the process.
+
+Example 2
+Running a program from terminal:
+
+python app.py
+
+OS creates a new process for that program.
+
+2. Ready
+
+The process is ready to run, but waiting for the CPU.
+
+The program is loaded in memory but the CPU is busy with another process.
+
+Example 1
+You open Chrome and VS Code at the same time.
+Both are ready, but CPU runs one at a time.
+
+Example 2
+Three programs waiting in the CPU queue:
+
+P1
+P2
+P3
+
+All are in Ready state until CPU picks one.
+
+3. Running
+
+The process is currently executing on the CPU.
+
+Only one process per CPU core can be in running state.
+
+Example 1
+A Python script calculating numbers.
+
+Example 2
+A video rendering program using CPU to process frames.
+
+4. Waiting (Blocked)
+
+The process cannot continue until some event or I/O finishes.
+
+Example 1
+Program waiting for keyboard input.
+
+Example 2
+Program waiting for data from disk.
+
+While waiting, it does not use CPU.
+
+5. Terminated
+
+The process has finished execution or has been stopped.
+
+Example 1
+A program finishes printing output.
+
+Example 2
+You close an application manually.
+
+The OS removes it from memory.
+
+Process State Flow
+
+You should remember this diagram:
+
+New → Ready → Running → Waiting → Ready → Running → Terminated
+
+Key transitions:
+
+Ready → Running : CPU scheduler selects the process
+
+Running → Waiting : I/O request
+
+Waiting → Ready : I/O completed
+
+Brutal truth for interviews
+
+If you only remember this clearly:
+
+New
+Ready
+Running
+Waiting
+Terminated
