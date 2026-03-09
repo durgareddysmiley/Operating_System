@@ -1,0 +1,92 @@
+Thread
+
+A thread is the smallest unit of execution inside a process.
+It represents a single sequence of instructions that the CPU executes.
+
+In simple words:
+A thread is one path of execution of a program.
+
+A process can have one or many threads.
+
+You do NOT create a thread inside a processor. The processor is hardware. Threads are created inside a process by the program or OS.
+The processor only executes them.
+
+So the real question is:
+
+When do we create multiple threads instead of using another processor?
+
+Because adding processors is hardware, while creating threads is software and much cheaper.
+
+1. When tasks can run in parallel
+
+If a program has multiple independent tasks, threads allow them to run at the same time.
+
+Example 1
+A browser:
+
+Thread 1 → loading webpage
+
+Thread 2 → downloading images
+
+Thread 3 → running JavaScript
+
+All tasks can run simultaneously.
+
+Example 2
+Video editing software:
+
+Thread 1 → rendering frames
+
+Thread 2 → audio processing
+
+Thread 3 → UI updates
+
+Instead of waiting for one task to finish, threads handle them together.
+
+2. When you want faster performance
+
+Some tasks can be split into smaller pieces and processed in parallel.
+
+Example 1
+Searching a large dataset:
+
+Thread 1 → search first half
+
+Thread 2 → search second half
+
+Example 2
+Matrix multiplication:
+
+Thread 1 → compute first rows
+
+Thread 2 → compute remaining rows
+
+Parallel threads reduce total time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
