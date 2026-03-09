@@ -1,3 +1,90 @@
  Wht is os 
 diffrence between pplictin soft wr e nd system softwre 
 t wird inrerface cane 
+
+OPERATING SYSTEM 
+
+## DEFINITION:
+An Operating System is system software that acts as an interface between application software and computer hardware and manages system resources such as CPU, memory, and input/output devices.
+
+## DIFFERENCE BETWEEN APPLICATION SOFTWARE AND SYSTEM SOFTWARE
+
+1. Application Software
+
+Application software is built for users to perform tasks.
+
+You directly use it to do something.
+
+Examples:
+
+Microsoft Word
+
+WhatsApp
+
+Google Chrome
+
+Example 1
+
+You open Chrome → browse YouTube → watch cricket highlights.
+
+Chrome is application software.
+
+Example 2
+
+You write a report in Word.
+
+Word is application software.
+
+Application software depends on the OS to run.
+
+2. System Software
+
+System software controls and manages the computer hardware.
+
+Users usually don’t interact with it directly.
+
+Examples:
+
+Windows
+
+Linux
+
+Device drivers
+
+Compilers
+
+Example 1 — RAM allocation
+
+Suppose you open two applications:
+
+Google Chrome
+
+Microsoft Word
+
+Both programs need memory (RAM) to run.
+
+What happens:
+
+Chrome asks the OS → “I need memory to run.”
+
+Word asks the OS → “I also need memory.”
+
+Now the Operating System decides:
+
+RAM = 8 GB
+
+Chrome → 2 GB
+Word → 1 GB
+Remaining → for other programs
+
+The OS allocates memory safely so one program cannot overwrite another program’s data.
+
+If the OS didn't do this:
+
+Example 1
+Chrome could overwrite Word's memory → Word crashes.
+
+Example 2
+Two programs try to use the same RAM location → system crash.
+
+That is system software managing hardware resources.
