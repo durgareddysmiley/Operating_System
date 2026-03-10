@@ -5,7 +5,8 @@ t wird inrerface cane
 OPERATING SYSTEM 
 
 ## DEFINITION:
-An Operating System is system software that acts as an interface between application software and computer hardware and manages system resources such as CPU, memory, and input/output devices.
+An Operating System is system software that acts as an interface between application software and computer hardware and manages
+system resources such as CPU, memory, and input/output devices.
 
 ## DIFFERENCE BETWEEN APPLICATION SOFTWARE AND SYSTEM SOFTWARE
 
@@ -88,6 +89,53 @@ Example 2
 Two programs try to use the same RAM location → system crash.
 
 That is system software managing hardware resources.
+
+## HOW OS USED IN IO DEVICES 
+Correct flow of INPUT
+
+When a program needs input, the process happens like this.
+
+Step 1
+
+Program asks the OS for input.
+
+Example 1
+A program asks for keyboard input.
+
+Example 2
+A program asks to read a file from disk.
+
+Program → Operating System
+Step 2
+
+OS communicates with the hardware using device drivers.
+
+Example 1
+
+Operating System → Keyboard
+
+Example 2
+
+Operating System → Disk
+Step 3
+
+Hardware sends the data back to OS.
+
+Example 1
+
+Keyboard → Operating System
+
+Example 2
+
+Disk → Operating System
+Step 4
+
+OS gives the input to the program.
+
+Operating System → Program
+Full input flow
+Program → OS → Hardware
+Hardware → OS → Program
 
 ## PROCESS 
 PROCESS IS ENTITY  IT IS CREATED BY OS TO EXECUTE THE PROGRAM 
