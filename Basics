@@ -19,7 +19,7 @@ You directly use it to do something.
 Examples:
 
 Microsoft Word
-
+ 
 WhatsApp
 
 Google Chrome
@@ -148,7 +148,7 @@ instructions and required data, into that reserved memory. After that, the CPU b
 ## Y We cannot directly assign random memory to a program y we need reserved memory 
 We cannot directly assign random memory to a program because the operating system must manage and protect memory. Instead, the OS reserves a specific portion of
 main memory and creates a process for the program. This process memory is organized into sections such as machine code (instructions), data for static and global
-variables, heap for dynamic memory, and stack for function calls.
+variables, heap for dynamic memory, and stack for function calls. these are inside the process 
 
 A program does not become a process until it starts running (or is about to run). At that moment the OS creates a process and allocates memory for it.
 
@@ -165,7 +165,9 @@ Loading program = parking the car in that space.
 ## PROCESS CONTROL BLOCK
 
 CONTEXT = PROPERTIES 
-IT STORES ALL THE PROCESS PROPERTIES AND ATTRIBUTES 
+When we talk about the properties of a process, they refer to the information that the operating system stores about the process so it can manage it (such as process ID, process state, program counter, registers, etc.).
+
+Machine code (instructions), data, heap, and stack are not properties. They are sections of memory organized inside the process, which is called the process memory layout.
 
 ## PROPERTIES OF PROCESS 
 1. Process ID (PID)
