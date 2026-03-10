@@ -6,7 +6,7 @@ system resources such as CPU, memory, and input/output devices.
 
 ## DIFFERENCE BETWEEN APPLICATION SOFTWARE AND SYSTEM SOFTWARE
 
-1. Application Software
+1. Application Software 
 
 Application software is built for users to perform tasks.
 
@@ -226,25 +226,80 @@ When context switching happens, OS saves the program counter so execution can re
 
 4. CPU Registers
 
-Registers store temporary execution data.
+A register is a very small and very fast memory inside the CPU.
+The CPU uses registers to temporarily store data while executing instructions.
 
-Examples:
+1. Accumulator Register
 
-accumulator
-
-index registers
-
-stack pointer
-
+The accumulator stores the result of arithmetic operations.
 Example 1
-During calculation:
 
 a = b + c
 
-Values stored temporarily in registers.
+What CPU does:
 
-Example 2
-While switching processes, OS saves register values so the process can continue correctly later.
+load b into register
+
+load c
+
+add them
+
+result stored in accumulator
+
+So the accumulator temporarily holds the result of the calculation.
+
+2. Index Register
+
+An index register is a CPU register used to calculate the address of elements in arrays or sequential data.
+
+The CPU uses this formula:
+
+Address = Base Address + Index
+
+Base address → starting location of the array in memory
+
+Index → position of the element
+
+The index value is stored in the index register.
+
+Example 1 – Accessing an array element
+
+Program:
+
+arr[3]
+
+Suppose the array starts at memory address 1000.
+
+Base address = 1000
+Index = 3
+
+CPU calculates:
+
+Address = 1000 + 3
+
+3. Stack Pointer
+
+The stack pointer stores the address of the top of the stack.
+
+The stack is used for:
+
+function calls
+
+local variables
+
+return addresses
+
+Example 1
+
+void fun(){
+   int a = 5;
+}
+
+When fun() runs:
+
+variable a goes into stack
+
+stack pointer moves to that location.
 
 5. Memory Information
 
