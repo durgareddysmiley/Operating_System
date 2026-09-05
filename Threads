@@ -8,7 +8,7 @@ What does "unit of execution" mean?
 Execution = the CPU actually doing the instructions of a program.
 
 A program contains many instructions:
-
+ 
 Calculate A + B
 Store the result
 Read some data
