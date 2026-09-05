@@ -8,7 +8,7 @@ What does "unit of execution" mean?
 Execution = the CPU actually doing the instructions of a program.
 
 A program contains many instructions:
- 
+  
 Calculate A + B
 Store the result
 Read some data
@@ -94,6 +94,14 @@ Thread 2 → compute remaining rows
 Parallel threads reduce total time.
 
 
+1. Basic difference
+Process                                                                        	Thread
+A program in execution                                                    	   A flow of execution inside a process
+Has its own memory/resources	                                                 Shares memory/resources with other threads of the same process
+Usually heavier	                                                              Lighter
+Communication between processes is harder	                                    Communication between threads is easier
+Creating a process takes more time	                                           Creating a thread takes less time
+If one process crashes, other processes are generally unaffected	             If one thread crashes badly, the entire process can be affected
 
 
 
