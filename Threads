@@ -5,7 +5,7 @@ It represents a single sequence of instructions that the CPU executes.
 
 What does "unit of execution" mean?
 
-Execution = the CPU actually doing the instructions of a program.
+Execution = the CPU actually doing the instructions of a program. 
 
 A program contains many instructions:
   
@@ -312,6 +312,591 @@ RT = First CPU Start Time − AT
 
 These three formulas are extremely important.
 
+CRITICAL SECTIOM PROBLEM
+
+1. What is a Critical Section?
+
+A critical section is the part of a program where a process/thread accesses or modifies shared resources/data.
 
 
+Example:
 
+Thread 1 ──→ access shared variable X
+Thread 2 ──→ access shared variable X
+
+The code that accesses X is the critical section.
+
+Simple example
+
+Suppose:
+
+int balance = 1000;
+
+Two threads both want to withdraw money:
+
+Thread 1 → withdraw 700
+Thread 2 → withdraw 500
+
+Both threads access the same balance.
+
+The code:
+
+balance = balance - amount;
+
+is a critical section because it modifies shared data.
+
+
+2. What is the Critical Section Problem?
+
+The problem is:
+
+How do we make sure that multiple processes/threads don't access a shared resource in a way that produces incorrect results?
+
+Only one process/thread should execute the critical section at a time when the shared operation requires mutual exclusion.
+
+Think:
+
+        Shared Resource
+              ↑
+       ┌──────┴──────┐
+   Thread 1       Thread 2
+       ↓               ↓
+   Critical        Critical
+   Section         Section
+
+We don't want both entering the critical section simultaneously when that would cause a race.
+
+3. Why is this a problem?
+
+Because of a race condition.
+
+Example:
+
+int count = 5;
+
+Two threads execute:
+
+count = count + 1;
+
+It looks like:
+
+Thread 1 → read 5
+Thread 2 → read 5
+Thread 1 → write 6
+Thread 2 → write 6
+
+Expected:
+
+count = 7
+
+Actual:
+
+count = 6
+
+The result depends on the order/timing of execution.
+
+That's a race condition.
+
+4. Structure of a Process
+
+For critical-section problems, remember this structure:
+
+┌─────────────────────┐
+│ Entry Section       │
+├─────────────────────┤
+│ Critical Section    │ ← shared resource
+├─────────────────────┤
+│ Exit Section        │
+├─────────────────────┤
+│ Remainder Section   │
+└─────────────────────┘
+Entry Section
+
+Code used to request permission to enter the critical section.
+
+Critical Section
+
+Code that accesses shared data/resource.
+
+Exit Section
+
+Code used to release the resource/permission.
+
+Remainder Section
+
+The rest of the program that doesn't access the shared resource.
+
+
+5. Three Requirements of a Good Solution ⭐
+
+This is very important for placements.
+
+A solution to the critical-section problem should satisfy:
+
+1. Mutual Exclusion
+
+Only one process can be inside the critical section at a time.
+
+P1 → Critical Section
+P2 → WAIT
+
+P2 cannot enter until P1 leaves.
+
+2. Progress
+
+If no process is inside the critical section, and some processes want to enter, the decision of who enters next should not be postponed indefinitely.
+
+In simple words:
+
+If the critical section is free, a waiting process should eventually get a chance to enter.
+
+3. Bounded Waiting
+
+A process should not have to wait forever to enter the critical section.
+
+Example:
+
+P1 wants to enter
+ ↓
+P2 enters
+ ↓
+P3 enters
+ ↓
+P4 enters
+ ↓
+P1 still waiting...
+
+If this can continue forever, bounded waiting is violated.
+
+6. Critical Section vs Race Condition
+
+Don't confuse these.
+
+Critical Section:
+
+Part of the program that accesses shared data.
+
+Race Condition:
+
+Problem that occurs when multiple threads/processes access shared data concurrently and the final result depends on their execution order.
+
+Example:
+
+Shared variable
+      ↓
+Critical Section
+      ↓
+Multiple threads enter incorrectly
+      ↓
+Race Condition
+7. How do we solve it?
+
+We use synchronization mechanisms.
+
+Common ones:
+
+Mutex
+Semaphore
+Monitor
+Locks
+
+For placements, especially remember:
+
+Mutex provides mutual exclusion.
+
+Example:
+
+Thread 1
+   ↓
+LOCK
+   ↓
+Critical Section
+   ↓
+UNLOCK
+
+While Thread 1 has the lock:
+
+Thread 2 → WAIT
+
+
+Semaphore — OS Placement Explanation
+
+You should understand semaphore as a synchronization tool used to control access to shared resources.
+
+Don't memorize the definition first. Understand the problem.
+
+1. Why do we need a semaphore?
+
+Suppose we have 3 threads trying to use the same resource:
+
+T1 ──┐
+T2 ──┼──→ Shared Resource
+T3 ──┘
+
+If all of them access it at the same time, we may get a race condition.
+
+We need something that controls:
+
+"How many threads are allowed to access this resource at a time?"
+
+That's where a semaphore is used.
+
+2. What is a Semaphore?
+
+A semaphore is a synchronization mechanism that uses an integer value to control access to shared resources.
+
+Think of it like a counter/token system.
+
+For example, suppose there are 3 identical resources available:
+
+Semaphore = 3
+
+That means:
+
+Up to 3 processes/threads can access the resource simultaneously.
+
+When a thread takes one resource:
+
+3 → 2
+
+Another:
+
+2 → 1
+
+Another:
+
+1 → 0
+
+Now no more threads can enter until someone releases a resource.
+
+3. Two Important Operations ⭐
+
+Semaphores mainly use two atomic operations:
+
+wait() / P()
+
+Used when a process wants to acquire a resource.
+
+Conceptually:
+
+wait(S)
+{
+    while(S <= 0)
+        wait;
+    S--;
+}
+
+If the resource is available:
+
+S = 3
+   ↓
+wait()
+   ↓
+S = 2
+
+If:
+
+S = 0
+
+the process must wait/block until a resource becomes available.
+
+signal() / V()
+
+Used when a process releases the resource.
+
+signal(S)
+{
+    S++;
+}
+
+Example:
+
+S = 0
+   ↓
+signal()
+   ↓
+S = 1
+
+Now another waiting process can potentially acquire the resource.
+
+4. Easy Example — Parking Lot 🚗
+
+Imagine a parking lot has 3 spaces.
+
+Semaphore = 3
+
+Three cars enter:
+
+Car 1 → space → S = 2
+Car 2 → space → S = 1
+Car 3 → space → S = 0
+
+Fourth car arrives:
+
+Car 4 → WAIT
+
+Then Car 1 leaves:
+
+signal()
+S = 1
+
+Car 4 can now enter.
+
+So:
+
+Semaphore controls how many processes/threads can access a resource simultaneously.
+
+5. Types of Semaphores ⭐
+
+There are two important types.
+
+Binary Semaphore
+
+Value is generally:
+
+0 or 1
+
+It allows only one thread/process to access the protected resource at a time.
+
+S = 1 → available
+S = 0 → unavailable
+
+It can be used for mutual exclusion.
+
+Counting Semaphore
+
+Value can be:
+
+0, 1, 2, 3, 4, ...
+
+It is useful when there are multiple instances of a resource.
+
+Example:
+
+5 printers
+Semaphore = 5
+
+Up to 5 processes can use printers simultaneously.
+
+6. Semaphore and Critical Section
+
+This is where everything connects:
+
+          Shared Resource
+                ↓
+        Critical Section
+                ↓
+          Semaphore
+                ↓
+      Controls access
+
+Example:
+
+wait(S);
+
+Critical Section
+
+signal(S);
+
+Meaning:
+
+wait()   → acquire permission
+   ↓
+Critical Section
+   ↓
+signal() → release permission
+7. Semaphore vs Mutex ⭐
+
+This is a common interview question.
+
+Semaphore	                                                           Mutex
+Uses a counter                       	                     Usually represents locked/unlocked ownership
+Can allow multiple threads	                               Normally allows only one thread
+Counting semaphore can be > 1         	                  Typically binary
+Used for resource counting and synchronization	            Mainly used for mutual exclusion
+Ownership semantics are not generally required	            The thread that locks a mutex is normally responsible for unlocking it
+
+Easy example
+
+Semaphore:
+
+3 resources
+S = 3
+→ 3 threads can enter
+
+Mutex:
+
+1 shared resource
+→ only 1 thread enters
+8. Important Warning: wait() and signal() must be atomic
+
+This is an important placement/interview point.
+
+The operations that modify the semaphore must be performed atomically so that two processes don't simultaneously modify the semaphore incorrectly.
+
+Otherwise, the synchronization mechanism itself could suffer from a race condition.
+
+9. Semaphore vs Critical Section
+
+Don't confuse them:
+
+Critical Section = code that accesses shared data.
+
+Semaphore = synchronization mechanism used to control access to that code/resource.
+
+Example:
+
+wait(S);              ← synchronization
+
+balance -= 500;       ← critical section
+
+signal(S);            ← synchronization
+
+
+Peterson's Solution — Quick Revision Notes
+What is Peterson's Solution?
+
+Peterson's Solution is a software-based algorithm used to solve the Critical Section Problem for two processes.
+
+It provides:
+
+Mutual Exclusion
+Progress
+Bounded Waiting
+1. Two Variables
+
+Peterson's Solution uses two shared variables:
+
+flag[]
+
+Shows whether a process wants to enter the critical section.
+
+flag[0] = true → P0 wants to enter
+flag[1] = true → P1 wants to enter
+turn
+
+Used to decide who gets the chance when both want to enter.
+
+turn = 0 → P0 gets the chance
+turn = 1 → P1 gets the chance
+⭐ Remember
+flag → "I want to enter."
+turn → "If both want to enter, who should wait?"
+2. Basic Logic
+
+For P0:
+
+flag[0] = true;
+turn = 1;
+
+while(flag[1] && turn == 1)
+    wait;
+
+// Critical Section
+
+flag[0] = false;
+
+For P1:
+
+flag[1] = true;
+turn = 0;
+
+while(flag[0] && turn == 0)
+    wait;
+
+// Critical Section
+
+flag[1] = false;
+
+Don't memorize the code blindly. Remember the logic.
+
+3. How P0 and P1 Enter ⭐
+Case 1: Only P0 wants to enter
+flag[0] = true
+flag[1] = false
+
+P0 sees that P1 doesn't want to enter.
+
+P0 → Critical Section
+Case 2: Only P1 wants to enter
+flag[0] = false
+flag[1] = true
+
+P1 sees that P0 doesn't want to enter.
+
+P1 → Critical Section
+Case 3: Both want to enter ⭐⭐⭐
+flag[0] = true
+flag[1] = true
+
+Now turn breaks the tie.
+
+Example:
+
+turn = 0
+
+means P0 gets the chance:
+
+P0 → Critical Section
+P1 → Wait
+
+When P0 finishes:
+
+flag[0] = false
+
+Then:
+
+P1 → Critical Section
+4. The Complete Flow
+P0 wants to enter
+      ↓
+flag[0] = true
+      ↓
+Give P1 the turn
+      ↓
+Check whether P1 wants to enter
+      ↓
+If P1 doesn't want → P0 enters
+      ↓
+If P1 also wants → turn decides
+      ↓
+One enters, other waits
+      ↓
+First process exits
+      ↓
+Its flag = false
+      ↓
+Other process enters
+5. Three Requirements ⭐⭐⭐
+
+Peterson's Solution satisfies:
+
+1. Mutual Exclusion
+
+Only one process can be inside the critical section at a time.
+
+2. Progress
+
+If the critical section is free, a process should not be unnecessarily prevented from entering.
+
+3. Bounded Waiting
+
+A process should not wait forever to enter the critical section.
+
+6. Limitations
+1. Only two processes
+
+Classic Peterson's Solution is designed for two processes.
+
+2. Busy Waiting
+
+The process continuously checks the condition:
+
+while(...)
+    wait;
+
+So CPU time can be wasted while waiting.
+
+3. Mainly theoretical
+
+Modern systems generally use mutexes, semaphores, locks, and hardware atomic operations instead of directly implementing classic Peterson's algorithm.
