@@ -104,26 +104,213 @@ Creating a process takes more time	                                           Cr
 If one process crashes, other processes are generally unaffected	             If one thread crashes badly, the entire process can be affected
 
 
+CPU SCHEDULING 
+
+When we run a program, the Operating System creates a process for it. The newly created process is placed in the Ready State. The CPU Scheduler selects a process 
+from the Ready Queue and allocates the CPU to it. Then the CPU executes the instructions of that process.
+
+CPU Scheduling — Placement-Oriented
+
+First, one correction:
+
+CPU Scheduling is not just "a process going to the CPU."
+
+CPU Scheduling is the process of deciding which ready process should get the CPU next.
 
 
 
+1. Why do we need CPU Scheduling?
+
+Suppose 3 processes are waiting:
+
+Ready Queue
+
+P1
+P2
+P3
+ ↓
+CPU
+
+The CPU can execute only one process/thread at a time on a single CPU core.
+
+So the OS has to decide:
+
+"Which process should I give the CPU to first?"
+
+That decision is called CPU Scheduling.
+
+
+So the OS uses CPU Scheduling Algorithms to decide the order.
+
+4. Main CPU Scheduling Algorithms
+
+For placements, these are the important ones:
+ 
+Algorithm	                                 Basic idea
+FCFS	                               First process that arrives gets CPU first
+SJF	                                  Process with shortest CPU burst gets CPU first
+SRTF	                               Preemptive version of SJF
+Priority Scheduling	                    Highest-priority process gets CPU
+Round Robin                        	Each process gets a fixed time slice
+Multilevel Queue	                       Processes divided into different queues
+Multilevel Feedback Queue	               Processes can move between queues
 
 
 
+5. Non-Preemptive Scheduling
+
+Once a process gets the CPU, it keeps the CPU until it finishes or voluntarily goes to a waiting state.
+
+Example:
+
+P1 → CPU
+       │
+       │ running
+       │
+       ↓
+     Finish
+       ↓
+P2 → CPU
+
+The OS doesn't forcibly take the CPU away from P1.
+
+Example
+
+Suppose:
+
+P1 = 5 sec
+P2 = 2 sec
+
+P1 starts:
+
+CPU
+│
+├────── P1 ──────┤
+                  ↓
+                P2
+
+P2 has to wait until P1 finishes.
+
+FCFS and basic SJF are non-preemptive.
+
+6. Preemptive Scheduling
+
+Here, the OS can take the CPU away from a running process and give it to another process.
+
+Example:
+
+P1 → CPU
+     ↓
+     P1 running
+     ↓
+New/high-priority process P2 arrives
+     ↓
+OS takes CPU from P1
+     ↓
+P2 → CPU
+
+This is called preemption.
+
+Real-life analogy
+
+Imagine you're studying:
+
+You → studying
+     ↓
+Friend calls
+     ↓
+You stop studying
+     ↓
+Answer the call
+     ↓
+Return to studying
+
+You were preempted.
+
+PARAMETERS OF PROCESS 
+
+Arrival Time (AT)
+
+When the process enters the Ready Queue.
+
+Example:
+
+P1 arrives at time 0
+P2 arrives at time 2
+
+So:
+
+P1 → AT = 0
+P2 → AT = 2
+
+Burst Time (BT)
+
+The amount of CPU time required by a process.
+
+Example:
+
+P1 needs CPU for 5 ms
+
+BT = 5 ms
+
+Don't confuse this with total time the process spends in the system. Burst time is specifically CPU execution time.
+
+Completion Time (CT)
+
+The time at which the process finishes execution.
 
 
+Turnaround Time (TAT)
+
+Total time from arrival until completion.
+
+TAT = Completion Time − Arrival Time
+
+Example:
+
+Arrival = 2
+Completion = 10
+
+TAT = 10 − 2
+    = 8
+Waiting Time (WT)
+
+Time spent waiting in the Ready Queue.
+
+WT = Turnaround Time − Burst Time
+
+Example:
+
+TAT = 8
+BT = 5
+
+WT = 8 − 5
+   = 3
+
+Response Time (RT)
+
+Time from when the process arrives until it gets CPU for the first time.
+
+This is especially important in Round Robin and interactive systems
 
 
+8. The formulas you MUST know
 
+For placement questions:
 
+Turnaround Time
 
+TAT = CT − AT
 
+Waiting Time
 
+WT = TAT − BT
 
+Response Time
 
+RT = First CPU Start Time − AT
 
-
-
+These three formulas are extremely important.
 
 
 
