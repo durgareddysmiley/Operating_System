@@ -407,7 +407,7 @@ Process State Flow
 
 You should remember this diagram:
 
-New → Ready → Running → Waiting → Ready → Running → Terminated
+New → Ready → Running → Waiting → Ready → Running → Terminated 
 
 Key transitions:
 
