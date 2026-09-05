@@ -3,7 +3,37 @@ Thread
 A thread is the smallest unit of execution inside a process.
 It represents a single sequence of instructions that the CPU executes.
 
-In simple words:
+What does "unit of execution" mean?
+
+Execution = the CPU actually doing the instructions of a program.
+
+A program contains many instructions:
+
+Calculate A + B
+Store the result
+Read some data
+Print the result
+
+The CPU needs something to run/execute those instructions. A thread is the smallest unit that the CPU can schedule and execute.
+
+Simple example
+
+Suppose you open Chrome.
+
+Chrome is a process.
+
+Inside Chrome, there can be multiple threads:
+
+Chrome Process
+│
+├── Thread 1 → handles your webpage
+├── Thread 2 → plays video
+├── Thread 3 → handles keyboard/mouse
+└── Thread 4 → downloads something
+
+Each thread represents a separate flow of instructions that the CPU can execute.
+
+In simple words: 
 A thread is one path of execution of a program.
 
 A process can have one or many threads.
