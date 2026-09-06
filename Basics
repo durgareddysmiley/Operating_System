@@ -343,7 +343,7 @@ You double-click a program → OS starts creating the process.
 
 Example 2
 Running a program from terminal:
-
+ 
 python app.py
 
 OS creates a new process for that program.
