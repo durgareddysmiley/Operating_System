@@ -468,7 +468,7 @@ P1 still waiting...
 
 If this can continue forever, bounded waiting is violated.
 
-6. Critical Section vs Race Condition
+6. Critical Section vs Race Condition 
 
 Don't confuse these.
 
