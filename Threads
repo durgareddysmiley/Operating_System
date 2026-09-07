@@ -1129,3 +1129,13 @@ EXAMPLES
 
 Terminate one or more processes
 Take resources back where possible
+
+
+7. PREVENTION VS AVOIDANCE 
+
+| Prevention                                                       | Avoidance                                          |
+| ---------------------------------------------------------------- | -------------------------------------------------- |
+| Prevents at least one deadlock condition                         | Checks whether allocation is safe                  |
+| Makes structural restrictions                                    | Makes decisions dynamically                        |
+| Doesn't need future maximum resource information in the same way | **Banker's Algorithm** uses maximum resource needs |
+| Goal: make deadlock impossible                                   | Goal: avoid entering an unsafe state               |
