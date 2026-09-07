@@ -1033,35 +1033,99 @@ Design the system so that at least one of the four necessary conditions cannot o
 
 Example:
 
+CPU can easily be preempted from a process because its state can be saved.
+
 Break Hold and Wait by requiring a process to request all required resources at once.
 
-2. Deadlock Avoidance
+How do we break it?
 
-The OS checks whether granting a resource could lead to an unsafe state and avoids it.
+We say:
 
-The famous algorithm is:
+A process must request ALL the resources it needs at the same time before it starts executing.
+
+For example, P1 needs:
+
+Printer
+Scanner
+File
+
+Instead of:
+
+P1 → gets Printer
+P1 → waits for Scanner
+P1 → waits for File
+
+2. DEADLOCK AVOIDANCE
+
+The OS doesn't blindly give resources to processes.
+
+Before giving a resource, the OS asks:
+
+"If I give this resource, is there still a way for all processes to finish?"
+
+Yes → Give the resource
+No → Don't give it now; make the process wait
+Simple example
+
+Suppose there are 3 printers and two processes:
+
+P1 needs 2 printers to finish.
+P2 needs 2 printers to finish.
+
+Currently:
+
+Available = 1 printer
+
+P1 asks for 1 printer
+
+The OS checks:
+
+"If I give this printer to P1, can P1 eventually get what it needs and finish, and then allow P2 to finish?"
+
+If the answer is yes, grant it.
+
+If giving it would put the system in a situation where processes could get stuck waiting forever, the OS says:
+
+"No, I won't give it now. Wait."
+
+What is an "unsafe state"?
+
+Unsafe state = A state where the OS cannot guarantee that all processes will be able to finish without deadlock.
+
+Important: Unsafe does not always mean deadlock has already happened. It means the system is at risk of reaching deadlock.
 
 Banker's Algorithm
 
-Think:
+Banker's Algorithm is used for deadlock avoidance.
 
-Request resource
-      ↓
-Will granting it be safe?
-      ↓
-Yes → Grant
-No  → Make process wait
-3. Deadlock Detection
+Think of a bank 🏦:
+
+A bank has limited money. A customer asks for a loan.
+
+The bank doesn't give the money just because it is available.
+
+It checks:
+
+"If I give this loan, will I still have enough money to satisfy everyone eventually?"
+
+If yes → give loan
+If no → don't give loan now
+
+The OS does the same thing with resources.
+
+
+3. DEADLOCK DETECTION 
 
 Allow deadlocks to occur, then detect them.
 
 The OS periodically checks whether a deadlock exists.
 
-4. Deadlock Recovery
+
+4. DEADLOCK RECOVERY 
 
 After detecting deadlock, the OS tries to recover.
 
-Examples:
+EXAMPLES
 
 Terminate one or more processes
 Take resources back where possible
