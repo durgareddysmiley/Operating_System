@@ -8,7 +8,7 @@ What does "unit of execution" mean?
 Execution = the CPU actually doing the instructions of a program. 
 
 A program contains many instructions:
-  
+   
 Calculate A + B
 Store the result
 Read some data
@@ -900,3 +900,168 @@ So CPU time can be wasted while waiting.
 3. Mainly theoretical
 
 Modern systems generally use mutexes, semaphores, locks, and hardware atomic operations instead of directly implementing classic Peterson's algorithm.
+
+
+DEADLOCK 
+
+First understand the idea, then memorize the 4 necessary conditions. Those are the most important interview points.
+
+1. What is Deadlock?
+
+Deadlock is a situation where two or more processes are waiting for resources held by each other, so none of them can continue.
+
+Simple example
+
+There are two processes and two resources:
+
+P1 has R1 → wants R2
+P2 has R2 → wants R1
+
+So:
+
+P1 → waiting for R2 → held by P2
+P2 → waiting for R1 → held by P1
+
+Neither can proceed.
+
+P1 ⟷ P2
+
+That's deadlock.
+
+2. Real-Life Example
+
+Imagine:
+
+Person A has Pen
+Person B has Notebook
+
+A says → "Give me Notebook, then I'll give Pen."
+
+B says → "Give me Pen, then I'll give Notebook."
+
+Both keep waiting.
+
+Nobody moves → Deadlock.
+
+
+3. FOUR NECESSARY CONDITIONS⭐⭐⭐
+
+A deadlock can occur only when all four conditions are present simultaneously.
+
+Remember:
+
+M-H-N-C
+
+1. MUTUAL EXCLUSION
+
+A resource can be used by only one process at a time.
+
+Example:
+
+P1 → Printer
+P2 → waiting
+
+2. Hold and Wait
+
+A process is holding one resource while waiting for another resource.
+
+Example:
+
+P1 holds R1
+       +
+P1 waits for R2
+
+3. No Preemption
+
+A resource cannot be forcibly taken away from a process; it must be released voluntarily.
+
+Example:
+
+P1 has R1
+↓
+OS cannot simply take R1 away
+
+4. Circular Wait
+
+A circular chain exists where each process is waiting for a resource held by the next process.
+
+Example:
+
+P1 waits for R2 → held by P2
+P2 waits for R3 → held by P3
+P3 waits for R1 → held by P1
+P1 → P2 → P3 → P1
+
+This is a circular wait.
+
+
+5. DEADLOCK VS STARVATION
+
+DEADLOCK
+
+Processes are waiting for each other and none can proceed.
+
+P1 → waits for P2
+P2 → waits for P1
+
+STARVATION
+
+A process keeps waiting because other processes continuously get the resource.
+
+P1 → waiting
+
+P2 → gets resource
+
+P3 → gets resource
+
+P4 → gets resource
+...
+P1 → still waiting
+
+Deadlock: Nobody in the cycle progresses.
+
+Starvation: Some processes progress, but one may wait indefinitely.
+
+
+6. HOW DO WE HANDLE DEAD LOCK ? 
+
+There are four major approaches.
+
+1. DEADLOCK PREVENTION 
+
+Design the system so that at least one of the four necessary conditions cannot occur.
+
+Example:
+
+Break Hold and Wait by requiring a process to request all required resources at once.
+
+2. Deadlock Avoidance
+
+The OS checks whether granting a resource could lead to an unsafe state and avoids it.
+
+The famous algorithm is:
+
+Banker's Algorithm
+
+Think:
+
+Request resource
+      ↓
+Will granting it be safe?
+      ↓
+Yes → Grant
+No  → Make process wait
+3. Deadlock Detection
+
+Allow deadlocks to occur, then detect them.
+
+The OS periodically checks whether a deadlock exists.
+
+4. Deadlock Recovery
+
+After detecting deadlock, the OS tries to recover.
+
+Examples:
+
+Terminate one or more processes
+Take resources back where possible
