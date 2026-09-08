@@ -380,3 +380,139 @@ Allocated block = 4 KB
 That unused 1 KB is inside the allocated block.
 
 That's internal fragmentation.
+
+
+PAGE FAULT — Easy Explanation
+
+First, remember paging:
+
+A process is divided into pages, and RAM is divided into frames.
+
+Now suppose the CPU wants to use a particular page.
+
+What if that page is NOT in RAM?
+
+That's a Page Fault.
+
+CPU needs Page 3
+       ↓
+Is Page 3 in RAM?
+    ↙       ↘
+  YES        NO
+   ↓          ↓
+Use it    PAGE FAULT
+              ↓
+       Find Page 3 on disk
+              ↓
+       Load it into RAM
+              ↓
+       Continue execution
+Simple example
+
+Suppose:
+
+Page 0 → RAM ✅
+Page 1 → RAM ✅
+Page 2 → RAM ✅
+Page 3 → Disk ❌
+
+CPU asks for Page 3.
+
+But Page 3 isn't in RAM.
+
+So:
+
+Page fault occurs.
+
+The OS then:
+
+Finds Page 3 on the disk.
+
+Finds a free frame in RAM.
+
+Loads Page 3 into that frame.
+
+Updates the page table.
+
+Continues the process.
+
+🧠 Real-life example
+
+Imagine you are studying a book.
+
+You have some pages on your desk (RAM):
+
+Desk:
+
+Page 1
+Page 2
+Page 5
+
+You suddenly need Page 10, but it's in your bag (disk).
+
+You have to:
+
+Need Page 10
+     ↓
+Not on desk
+     ↓
+Get it from bag
+     ↓
+Put it on desk
+     ↓
+Use it
+
+That's basically a page fault.
+
+Important
+
+Page fault does NOT mean the program crashed.
+
+It simply means:
+
+The required page is not currently in physical memory (RAM), so the OS must bring it from secondary storage.
+
+🔥 Interview answer
+
+A page fault occurs when a process tries to access a page that is not currently present in physical memory (RAM). The OS loads that page from secondary storage into RAM and then resumes execution.
+
+
+VIRTUAL MEMORY 
+
+You already know RAM is limited. Virtual memory is a technique that helps the OS run programs that are larger than the available RAM.
+
+
+Simple idea
+
+Suppose:
+
+Program needs = 8 GB
+RAM available = 4 GB
+
+Normally you might think:
+
+"The program can't run because there isn't enough RAM."
+
+But with virtual memory, the OS can keep only the currently needed parts of the program in RAM and keep the remaining parts on the disk/SSD.
+
+             Program = 8 GB
+                   ↓
+        ┌──────────┴──────────┐
+        ↓                     ↓
+     RAM = 4 GB           Disk/SSD
+   Needed pages          Other pages
+
+When the CPU needs a page that is currently on the disk:
+
+CPU needs Page 7
+      ↓
+Page 7 not in RAM
+      ↓
+   Page Fault
+      ↓
+OS brings Page 7
+from disk → RAM
+      ↓
+CPU continues
+
+So virtual memory works closely with paging and page faults.
