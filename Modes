@@ -38,6 +38,288 @@ OS performs operation
      ↓
 Back to User Mode
 
+
+CONTEXT SWITCHING — Easy Explanation
+
+Context switching means:
+
+The CPU stops running one process and starts running another process by saving the first process's information and loading the second process's information.
+
+Simple example
+
+Suppose:
+
+P1 is running
+   ↓
+CPU stops P1
+   ↓
+Save P1's current information
+   ↓
+Load P2's information
+   ↓
+P2 starts running
+
+Later:
+
+P2 is running
+   ↓
+CPU stops P2
+   ↓
+Save P2's information
+   ↓
+Load P1's information
+   ↓
+P1 continues from where it stopped
+What is "context"?
+
+Context = current state/information of a process.
+
+For example:
+
+Program Counter (where the process stopped)
+CPU registers
+Process state
+
+The OS stores this information in the PCB (Process Control Block).
+
+Visualize it
+             CPU
+              │
+       ┌──────┴──────┐
+       ↓             ↓
+      P1             P2
+   running         waiting
+       │
+       │ Context Switch
+       ↓
+      P1 → save context
+      P2 → load context
+       ↓
+      P2 runs
+
+Why does context switching happen?
+
+For example:
+
+1. Time sharing
+
+P1 runs → time slice ends → P2 runs
+
+2. I/O
+
+P1 runs → P1 requests disk → P1 waits
+                         ↓
+                    P2 runs
 Example 1
 
 Program wants to read a file → asks OS through a system call → kernel accesses the disk → returns the data.
+
+
+PROCESS SYNCHRONIZATION — Easy Explanation
+
+Synchronization means:
+
+Managing multiple processes/threads so they access shared data safely and don't interfere with each other.
+
+Why do we need it?
+
+Suppose two processes use the same variable:
+
+count = 5
+
+Both want to increase it by 1.
+
+P1 → reads count = 5
+P2 → reads count = 5
+P1 → makes it 6
+P2 → makes it 6
+
+We expected:
+
+5 → 6 → 7
+
+But we got:
+
+5 → 6
+
+This happens because both processes accessed the shared data at the same time.
+
+This is called a race condition.
+
+
+CRITICAL SECTION 
+
+Critical section is the part of a program where a process accesses or modifies a shared resource that can be accessed by multiple processes.
+
+Process
+   ↓
+┌───────────────┐
+│ Normal code   │
+├───────────────┤
+│ Critical      │ ← shared resource
+│ Section       │
+├───────────────┤
+│ Normal code   │
+└───────────────┘
+
+We want to make sure that only one process enters the critical section at a time.
+
+Example 1
+
+Two people trying to withdraw money from the same bank account at the same time.
+
+Example 2
+
+Two processes trying to update the same database record at the same time.
+
+How do we synchronize?
+
+COMMON SYNCHRONIZATION MECHANISMS:
+
+Mutex
+
+Semaphore
+
+Peterson's Solution
+
+Monitor
+
+PAGING 
+
+Paging is a memory management technique.
+
+The basic problem is:
+
+A process may be too large to fit into one continuous space in RAM.
+
+Paging solves this by dividing the process and RAM into equal-sized blocks.
+
+1. Divide the process into Pages
+
+Suppose a process needs 16 KB memory.
+
+If the page size is 4 KB:
+
+Process
+┌──────────┐
+│ Page 0   │ 4 KB
+├──────────┤
+│ Page 1   │ 4 KB
+├──────────┤
+│ Page 2   │ 4 KB
+├──────────┤
+│ Page 3   │ 4 KB
+└──────────┘
+
+These blocks are called pages.
+
+2. Divide RAM into Frames
+
+RAM is also divided into equal-sized blocks of the same size.
+
+These blocks are called frames.
+
+RAM
+┌──────────┐
+│ Frame 0  │ 4 KB
+├──────────┤
+│ Frame 1  │ 4 KB
+├──────────┤
+│ Frame 2  │ 4 KB
+├──────────┤
+│ Frame 3  │ 4 KB
+├──────────┤
+│ Frame 4  │ 4 KB
+└──────────┘
+
+So remember:
+
+Process → Pages
+RAM → Frames
+
+3. Pages don't need to be together
+
+This is the main advantage.
+
+Suppose RAM has free frames:
+
+RAM
+
+Frame 0 → Other process
+Frame 1 → Page 2
+Frame 2 → FREE
+Frame 3 → Page 0
+Frame 4 → FREE
+Frame 5 → Page 3
+Frame 6 → Page 1
+
+Our process's pages are scattered:
+
+Page 0 → Frame 3
+Page 1 → Frame 6
+Page 2 → Frame 1
+Page 3 → Frame 5
+
+That's completely okay.
+
+The Page Table keeps track of this mapping.
+
+Page Table
+
+Page 0 → Frame 3
+Page 1 → Frame 6
+Page 2 → Frame 1
+Page 3 → Frame 5
+
+🧠 Simple real-life example
+
+Think of a book.
+
+You divide the book into pages:
+
+Book → Page 1, Page 2, Page 3, Page 4
+
+Now imagine a library has shelves with empty spaces.
+
+The pages don't have to be stored together:
+
+Shelf 1 → Page 3
+Shelf 2 → Page 1
+Shelf 3 → Page 4
+Shelf 4 → Page 2
+
+You keep a list telling you where every page is.
+
+That list is like the page table.
+
+Why do we use Paging?
+Main advantage
+
+A process doesn't need one continuous block of memory.
+
+This helps avoid external fragmentation.
+
+🔥 Interview Revision Notes
+Paging
+
+Paging is a memory management technique where a process is divided into fixed-size pages and physical memory (RAM) is divided into fixed-size frames. Pages can be loaded into any available frames.
+
+Process → Pages
+RAM     → Frames
+             ↓
+        Page Table
+   Page → Frame mapping
+Remember these 3 things:
+
+1. Page → part of a process
+2. Frame → part of physical RAM
+3. Page Table → tells where each page is located
+
+Example
+Page 0 → Frame 5
+Page 1 → Frame 2
+Page 2 → Frame 7
+
+One-line memory trick:
+
+"Process is cut into Pages, RAM is cut into Frames, Page Table connects them."
