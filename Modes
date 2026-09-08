@@ -323,3 +323,60 @@ Page 2 → Frame 7
 One-line memory trick:
 
 "Process is cut into Pages, RAM is cut into Frames, Page Table connects them."
+
+
+External vs Internal Fragmentation — Easy Explanation
+
+Both mean memory is wasted, but the waste happens in different places.
+
+1. EXTERNAL FRAGMENTATION
+
+Free memory exists, but it is scattered into small pieces.
+
+Imagine RAM:
+
+┌──────────┐
+│    P1    │
+├──────────┤
+│  FREE    │  ← 2 MB
+├──────────┤
+│    P2    │
+├──────────┤
+│  FREE    │  ← 3 MB
+├──────────┤
+│    P3    │
+├──────────┤
+│  FREE    │  ← 2 MB
+└──────────┘
+
+Total free memory = 7 MB.
+
+But suppose a new process needs 5 MB continuously.
+
+It cannot fit, because the free memory is split into 2 + 3 + 2 MB.
+
+That's external fragmentation.
+
+🧠 Remember
+
+Outside the allocated blocks → External fragmentation
+
+2. INTERNAL FRAGEMENTATION
+
+Memory is allocated to a process, but the process doesn't use all of the allocated space.
+
+Suppose memory is allocated in fixed blocks of 4 KB.
+
+A process needs only 3 KB:
+
+Allocated block = 4 KB
+
+┌────────────────┐
+│ Process = 3 KB │
+├────────────────┤
+│ Wasted = 1 KB  │ ← unused inside
+└────────────────┘
+
+That unused 1 KB is inside the allocated block.
+
+That's internal fragmentation.
