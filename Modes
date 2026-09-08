@@ -1,0 +1,43 @@
+KERNEL MODE VS USER MODE 
+
+USER MODE 👤
+
+Normal applications run in User Mode.
+
+Has limited privileges.
+
+Cannot directly access critical hardware/resources.
+
+Examples: Chrome, VS Code, C programs.
+
+KERNEL MODE⚙️
+
+OS Kernel runs in Kernel Mode.
+
+Has high/full privileges.
+
+// Privileges means special rights or permissions given to someone to do something.
+
+Can access and control hardware, memory, CPU, files, etc.
+
+Why are two modes needed?
+
+To provide protection and security and prevent applications from damaging the OS or other processes.
+
+How do they work?
+
+Application
+     ↓
+User Mode
+     ↓
+System Call
+     ↓
+Kernel Mode
+     ↓
+OS performs operation
+     ↓
+Back to User Mode
+
+Example 1
+
+Program wants to read a file → asks OS through a system call → kernel accesses the disk → returns the data.
