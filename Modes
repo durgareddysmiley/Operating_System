@@ -516,3 +516,313 @@ from disk → RAM
 CPU continues
 
 So virtual memory works closely with paging and page faults.
+
+SEGMENTATION 
+
+Segmentation is a memory management technique where a program is divided into logical parts of different sizes.
+
+Unlike paging, segmentation does not divide everything into equal-sized blocks.
+
+Think about a program
+
+A program can have different parts:
+
+Program
+│
+├── Code       → instructions
+├── Data       → variables
+├── Stack      → function calls/local variables
+└── Heap       → dynamically allocated memory
+
+These are called segments.
+
+Each segment can have a different size.
+
+For example:
+
+Code  → 20 KB
+Data  → 10 KB
+Stack →  5 KB
+Heap  → 15 KB
+How does the OS find a segment?
+
+The OS maintains a segment table.
+
+Segment Table
+
+Segment     Base      Limit
+Code        1000      20 KB
+Data        5000      10 KB
+Stack       8000       5 KB
+Heap        9000      15 KB
+Base = where the segment starts in memory.
+Limit = size of the segment.
+Simple real-life example
+
+Think of a book.
+
+Instead of cutting it into equal-sized pages, you divide it according to meaning:
+
+Book
+├── Chapter 1 → 20 pages
+├── Chapter 2 → 35 pages
+├── Chapter 3 → 10 pages
+└── Appendix  → 5 pages
+
+The chapters have different sizes, just like segments.
+
+
+Segmentation vs Paging
+
+This is very important for interviews:
+
+Paging	                                                  Segmentation
+Divides process into fixed-size pages	                 Divides process into logical segments
+Pages are same size                                              	Segments are different sizes
+Based mainly on physical memory management                	Based on logical program structure
+Page → Frame                                           	Segment → Memory location
+
+
+File System — Easy Explanation
+
+File system is the method the Operating System uses to organize, store, and manage files on a storage device like an SSD or hard disk.
+
+Think of your phone or laptop storage:
+
+Storage
+│
+├── Documents
+│    ├── resume.pdf
+│    └── notes.txt
+│
+├── Photos
+│    ├── photo1.jpg
+│    └── photo2.jpg
+│
+└── Videos
+     └── video.mp4
+
+The file system manages all of this.
+
+What does a File System do?
+1. Creates files
+
+When you create:
+
+notes.txt
+
+the file system records and stores it.
+
+2. Organizes files
+
+It manages:
+
+Files
+  ↓
+Folders/Directories
+  ↓
+Subfolders
+
+3. Finds files
+
+When you open resume.pdf, the OS uses the file system to locate where the file's data is stored.
+
+4. Manages storage space
+
+It keeps track of:
+
+Used space
+Free space
+Which blocks belong to which files
+
+5. Controls access
+
+It can control who can read, write, or execute a file.
+
+Simple example
+
+Suppose you save a movie:
+
+movie.mp4
+
+The movie may be stored across different locations/blocks on the SSD.
+
+The file system keeps track of:
+
+movie.mp4
+   ↓
+Block 10
+Block 11
+Block 25
+Block 26
+...
+
+When you open the movie, the OS knows where to find its data.
+
+You don't need to know the physical locations. The file system handles that.
+
+Common File Systems
+
+You may hear these in interviews:
+
+NTFS → commonly used by Windows
+FAT32
+exFAT
+ext4 → commonly used in Linux
+APFS → used by Apple systems
+
+
+System Calls — Easy Explanation
+
+A system call is a way for a user program to request a service from the OS kernel.
+
+Remember what we learned:
+
+User Mode → limited permission
+Kernel Mode → high permission
+
+A normal program cannot directly perform certain operations, so it asks the kernel through a system call.
+
+Simple flow
+Application
+    ↓
+"I need an OS service"
+    ↓
+System Call
+    ↓
+Kernel
+    ↓
+Performs the operation
+    ↓
+Result returned
+    ↓
+Application
+Example 1: Reading a file
+
+Your program wants to read notes.txt.
+
+Program
+   ↓
+read()  ← System Call
+   ↓
+Kernel
+   ↓
+Reads file from storage
+   ↓
+Returns data
+   ↓
+Program
+
+The program doesn't directly control the disk. The kernel does it.
+
+Example 2: Creating a process
+
+A program can ask the OS to create another process using a system call such as fork() on Unix/Linux.
+
+Program
+   ↓
+fork()
+   ↓
+Kernel
+   ↓
+Creates new process
+   ↓
+Returns result
+Types of System Calls
+
+For interviews, remember these major categories:
+
+Type	                            Purpose	                       Example
+Process Control	Create/termina te processes	                 fork(), exit()
+File Management	Create/read/write files	                     open(), read(), write()
+Device Management	Access devices	device-related system calls
+Memory Management	Allocate/manage memory	                          mmap()
+Communication	        Communication between processes	                       pipe()
+
+
+IPC — INTER PROCESS COMMUNICATION
+
+IPC means Inter-Process Communication.
+
+Simply:
+
+IPC is how two or more processes communicate and exchange data with each other.
+
+Remember: normally, each process has its own memory.
+
+Process P1              Process P2
+┌──────────┐            ┌──────────┐
+│ Memory   │            │ Memory   │
+│   P1     │            │   P2     │
+└──────────┘            └──────────┘
+
+P1 cannot simply access P2's memory.
+
+So the OS provides IPC mechanisms for them to communicate.
+
+Example 1: Pipe
+
+Suppose P1 produces some data and P2 needs it.
+
+P1
+ │
+ │ "Hello"
+ ↓
+[ PIPE ]
+ ↓
+P2
+
+P1 writes data into the pipe, and P2 reads it.
+
+Example: One process produces output and another process uses that output.
+
+Example 2: Shared Memory
+
+The OS can create a memory area that both processes can access.
+
+P1 ──────┐
+         ↓
+   Shared Memory
+         ↑
+P2 ──────┘
+
+P1 writes data → P2 reads it.
+
+This is very fast, but synchronization is needed because both processes may access the same data at the same time.
+
+Common IPC Methods
+
+For interviews, remember:
+
+IPC
+│
+├── Pipes
+├── Shared Memory
+├── Message Queues
+├── Sockets
+└── Signals
+
+1. Pipe
+
+Processes communicate through a pipe.
+
+2. Shared Memory
+
+Processes share a common memory region.
+
+3. Message Queue
+
+Processes send and receive messages.
+
+P1 → [Message Queue] → P2
+4. Socket
+
+Processes communicate, often between different computers.
+
+Computer A              Computer B
+Process P1              Process P2
+    │                       ↑
+    └──── Socket ───────────┘
+5. Signal
+
+A process/OS sends a small notification to another process.
