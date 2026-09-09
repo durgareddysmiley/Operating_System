@@ -400,6 +400,33 @@ That unused 1 KB is inside the allocated block.
 That's internal fragmentation.
 
 
+Thrashing
+Thrashing is a situation in which the operating system spends more time swapping data between RAM (main memory) and the hard drive (secondary memory) than actually executing processes. This happens when there isn't enough physical memory (RAM) to handle the current workload, causing the system to constantly swap pages in and out of memory.
+
+Cause
+
+Too many processes
+
+Insufficient RAM
+
+High page fault rate
+
+Effects
+
+CPU utilization drops
+
+System becomes very slow
+
+Techniques to Handle Thrashing
+
+Reduce degree of multiprogramming
+
+Use working set model
+
+Increase physical memory
+
+Better page replacement algorithms
+
 PAGE FAULT — Easy Explanation
 
 First, remember paging:
