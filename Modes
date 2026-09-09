@@ -41,6 +41,8 @@ Back to User Mode
 
 CONTEXT SWITCHING — Easy Explanation
 
+Dispatcher conforms context switching 
+
 Context switching means:
 
 The CPU stops running one process and starts running another process by saving the first process's information and loading the second process's information.
