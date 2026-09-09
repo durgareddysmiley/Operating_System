@@ -47,3 +47,134 @@ Distributed OS → Multiple computers working together
 Network OS → Company server
 Mobile OS → Android
 Embedded OS → Washing machine
+
+Disk Scheduling Algorithms
+First: What is Disk Scheduling?
+Definition:
+Disk scheduling is the technique used by the Operating System to decide which disk I/O request should be served first.
+The main purpose is to reduce disk-head movement and improve disk performance.
+Real-time example
+Imagine a lift (elevator) in a building.
+People are waiting on floors 2, 5, 8, and 10. The lift must decide which floor to visit first.
+Similarly, a disk has many requests, and the disk head must decide which request to handle first.
+1. FCFS — First Come First Serve
+Definition
+Requests are processed in the exact order in which they arrive.
+Easy to understand
+Suppose requests arrive like this:
+A → B → C → D
+The disk serves:
+A → B → C → D
+It doesn't care which request is closer.
+Real-time example
+Bank queue:
+People arrive:
+Person A → Person B → Person C
+The bank serves them in the same order.
+Another example: Print queue — the first document sent to the printer is printed first.
+Remember
+FCFS = First request → First service
+2. SSTF — Shortest Seek Time First
+Definition
+The disk serves the request that is closest to the current position of the disk head.
+Easy to understand
+Suppose the disk head is at 50.
+Requests:
+20, 45, 55, 90
+Distances from 50:
+20 → 30
+45 → 5
+55 → 5
+90 → 40
+So the disk chooses 45 or 55, because they are closest.
+Real-time example
+Think of an elevator at floor 50.
+Requests are from floors:
+20, 45, 55, 90
+The elevator chooses a nearby floor first rather than going all the way to 90.
+Another example: A delivery person at one location chooses the nearest delivery first.
+Remember
+SSTF = Serve the nearest request first
+⚠️ Problem: A request that is far away may keep waiting for a long time. This is called starvation.
+3. SCAN — Elevator Algorithm
+Definition
+The disk head moves in one direction, serving requests along the way. When it reaches the end, it changes direction.
+That's why SCAN is also called the Elevator Algorithm.
+Easy to understand
+Suppose:
+Head = 50
+Requests = 20, 40, 60, 80
+Head is moving right
+It serves:
+50 → 60 → 80 → end → 40 → 20
+Then it comes back.
+Real-time example
+Think of an elevator.
+It starts going upward:
+Floor 5 → 6 → 8 → 10
+Then it reaches the top and comes downward:
+10 → 8 → 6 → 3
+Another example: A security guard checks rooms from one end of a building to the other, then comes back.
+Remember
+SCAN = Go one way → reach end → come back
+4. C-SCAN — Circular SCAN
+Definition
+The disk head moves in only one direction. When it reaches the end, it jumps back to the beginning and starts serving requests again.
+Easy to understand
+Suppose requests are:
+20, 40, 60, 80
+Head = 50, moving right.
+It goes:
+50 → 60 → 80 → end → jump to beginning → 20 → 40
+It does not serve requests while coming back.
+Real-time example
+Imagine a circular bus route.
+The bus travels:
+Stop 1 → 2 → 3 → 4 → 5
+Instead of turning around, it goes back to Stop 1 and starts the route again.
+Another example: A round-robin inspection where a worker always moves in one direction and, after reaching the last location, returns to the first.
+Remember
+C-SCAN = Go one way → jump to beginning → continue
+5. LOOK
+Definition
+LOOK works like SCAN, but the disk head does not travel all the way to the physical end of the disk.
+It turns around when there are no more requests in that direction.
+Easy to understand
+Suppose the disk has requests:
+20, 40, 60, 80
+Head = 50, moving right.
+SCAN might go:
+50 → 60 → 80 → 100 → reverse
+But LOOK goes:
+50 → 60 → 80 → reverse
+It stops at 80 because there is no request after 80.
+Real-time example
+An elevator has requests on floors:
+6, 8, 10
+The elevator is going upward.
+It doesn't need to go to the top floor if nobody requested it. It turns around after floor 10.
+Another example: A security guard checks only the rooms that actually need inspection and turns around after the last requested room.
+Remember
+LOOK = SCAN, but don't go unnecessarily to the end
+6. C-LOOK
+Definition
+C-LOOK works like C-SCAN, but the head doesn't travel to the physical end.
+It goes only as far as the last request, then jumps to the first request.
+Easy to understand
+Requests:
+20, 40, 60, 80
+Head = 50, moving right.
+C-LOOK:
+50 → 60 → 80 → jump → 20 → 40
+It doesn't go to the physical end.
+Real-time example
+Imagine a delivery person who has deliveries only at:
+60, 80, 20, 40
+They deliver in one direction:
+60 → 80
+Then instead of traveling through all the empty locations, they jump back to the first required location:
+20 → 40
+Another example: A circular inspection route that visits only locations where work is required.
+Remember
+C-LOOK = C-SCAN, but don't go to the end
+
