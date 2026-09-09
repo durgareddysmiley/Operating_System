@@ -2,7 +2,7 @@ KERNEL MODE VS USER MODE
 
 USER MODE 👤
 
-Normal applications run in User Mode.
+Normal applications run in User Mode. 
 
 Has limited privileges.
 
@@ -326,6 +326,22 @@ One-line memory trick:
 
 "Process is cut into Pages, RAM is cut into Frames, Page Table connects them."
 
+
+Demand Paging
+Demand paging is a memory management technique used in operating systems where a page (a fixed-size block of memory) is only loaded into the computer's RAM when it is needed, or "demanded" by a process.
+
+How Demand Paging Works:
+
+When a Program Starts: Initially, only a part of the program (some pages) is loaded into RAM. The rest of the program is stored on the hard drive (secondary memory).
+
+When a Page is Needed: If the program needs a page that is not currently in RAM, a page fault occurs. This means the operating system must fetch the required page from the hard drive and load it into RAM.
+
+Efficient Memory Use: With demand paging, only the parts of the program that are actively used are in memory, which makes better use of RAM. This allows the system to run large programs without needing all of their data loaded into memory at once.
+
+Advantages
+
+Better RAM utilization
+Faster program startup
 
 External vs Internal Fragmentation — Easy Explanation
 
