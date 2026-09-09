@@ -143,7 +143,7 @@ But we got:
 5 → 6
 
 This happens because both processes accessed the shared data at the same time.
-
+ 
 This is called a race condition.
 
 
