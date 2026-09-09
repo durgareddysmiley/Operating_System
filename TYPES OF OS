@@ -1,0 +1,49 @@
+Types of Operating Systems — With Real-Time Examples
+Type of OS	Simple Meaning	Real-Time Example
+1. Batch Operating System	Executes jobs in groups without continuous user interaction.	
+
+Payroll processing — thousands of employee salaries are processed together.
+2. Time-Sharing Operating System	Shares CPU time among multiple users/programs.
+
+College computer lab — many students use the same server at the same time.
+
+3. Multiprogramming OS	Keeps multiple programs in memory and switches between them to keep the CPU busy.	
+
+Running a browser while a file is being downloaded.
+4. Multitasking OS	Allows multiple tasks to run seemingly at the same time.	
+
+Windows — listening to music while using Chrome and Word.
+
+5. Multiprocessing OS	Uses multiple CPU cores/processors to execute tasks simultaneously.	
+
+Modern laptop — different CPU cores handle Chrome, video playback, and other tasks.
+
+6. Real-Time OS (RTOS)	Responds to events within a strict time limit.
+
+Car airbag system — detects a crash and deploys the airbag immediately.
+7. Distributed OS	Makes multiple connected computers work together as one system.
+
+Distributed computing system — several computers cooperate to process a large task.
+
+8. Network OS	Manages computers and resources connected through a network.	
+
+Company network — employees access shared files and printers from a server.
+
+9. Mobile Operating System	Designed for smartphones and tablets.	
+
+Android — used on smartphones for apps, calls, camera, etc.
+
+10. Embedded Operating System	Designed for a specific device or dedicated function.
+
+Washing machine — controls washing, rinsing, spinning, and timing.
+🔥 Easy examples to remember for exams
+Batch OS → Salary processing
+Time-Sharing OS → College computer lab
+Multiprogramming → Download + run another program
+Multitasking → Music + Chrome + Word
+Multiprocessing → Multiple CPU cores
+Real-Time OS → Car airbag
+Distributed OS → Multiple computers working together
+Network OS → Company server
+Mobile OS → Android
+Embedded OS → Washing machine
