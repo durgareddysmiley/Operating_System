@@ -81,7 +81,7 @@ If the OS didn't do this:
 Example 1
 Chrome could overwrite Word's memory → Word crashes.
 
-Example 2
+Example  2  
 Two programs try to use the same RAM location → system crash.
 
 That is system software managing hardware resources.
