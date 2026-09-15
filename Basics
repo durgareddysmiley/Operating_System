@@ -301,7 +301,7 @@ variable a goes into stack
 
 stack pointer moves to that location.
 
-5. Memory Information
+5. Memory Information // instructions input iytey data section lo store avutai,, functions calls iyter stack memory
 
 OS tracks what memory belongs to the process.
 
