@@ -1,10 +1,12 @@
 KERNEL MODE VS USER MODE 
 
 USER MODE 👤
-
+ 
 Normal applications run in User Mode. 
 
-Has limited privileges.
+Has limited privileges. 
+
+Privileges = limited permission to perform certain operation
 
 Cannot directly access critical hardware/resources.
 
