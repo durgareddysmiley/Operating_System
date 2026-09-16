@@ -1,39 +1,154 @@
-Types of Operating Systems — With Real-Time Examples
+Types of Operating Systems — With Real-Time Examples 
 Type of OS	Simple Meaning	Real-Time Example
 1. Batch Operating System	Executes jobs in groups without continuous user interaction.	
 
 Payroll processing — thousands of employee salaries are processed together.
-2. Time-Sharing Operating System	Shares CPU time among multiple users/programs.
 
-College computer lab — many students use the same server at the same time.
+2. Time-Sharing Operating System	A time-sharing OS gives each process/user a small time slice of the CPU.
 
-3. Multiprogramming OS	Keeps multiple programs in memory and switches between them to keep the CPU busy.	
+After that small time expires, the OS switches the CPU to another process. Because switching happens very quickly, everything appears to run at the same time.
 
-Running a browser while a file is being downloaded.
-4. Multitasking OS	Allows multiple tasks to run seemingly at the same time.	
+Simple example
+
+Suppose you have one CPU and 3 processes:
+
+CPU
+ ↓
+Process A → 10 ms
+Process B → 10 ms
+Process C → 10 ms
+Process A → 10 ms
+Process B → 10 ms
+...
+
+The OS keeps switching between them.
+
+Real-life example
+
+You are using:
+
+Chrome
+YouTube/music
+MS Word
+
+You can type in Word while music is playing and Chrome is open because the OS repeatedly gives each process CPU time.
+
+3. Multiprogramming OS: A multiprogramming operating system keeps multiple programs in main memory at the same time and switches the CPU to another program when the current 
+program is waiting for an I/O operation.
+
+The main goal is to keep the CPU busy and avoid wasting CPU time.
+
+Simple example
+
+Suppose 3 programs are in memory:
+
+Main Memory
+┌──────────────┐
+│ Program A    │
+│ Program B    │
+│ Program C    │
+└──────────────┘
+
+CPU starts executing Program A.
+
+If Program A needs to read a file from the disk, the CPU would otherwise sit idle.
+
+Instead, the OS gives the CPU to Program B:
+
+CPU → Program A
+       ↓
+    Waiting for I/O
+
+CPU → Program B
+       ↓
+    Executes
+
+When B waits for I/O, the CPU can run Program C.
+
+So the CPU stays busy.
+
+Example 1
+
+You have:
+
+Program A: Reading data from disk
+Program B: Performing calculations
+Program C: Printing data
+
+While A is waiting for disk I/O, the CPU executes B.
+
+4. Multitasking OS	: A multitasking operating system allows the user to run multiple programs/processes seemingly at the same time by rapidly switching the CPU between them.
+Each task gets a small amount of CPU time, not a separate CPU.
+
+For example, you have one CPU core:
+
+CPU
+ ↓
+Chrome → Word → Music → Chrome → Word → Music
+
+The OS gives each process a small amount of CPU time and switches between them very quickly. This is called context switching.
+
+Example 1: Normal computer use
+
+You are:
+
+Watching a YouTube video
+Downloading a file
+Typing in MS Word
+
+The OS manages all these processes so you can use them together.	
 
 Windows — listening to music while using Chrome and Word.
 
-5. Multiprocessing OS	Uses multiple CPU cores/processors to execute tasks simultaneously.	
+5. MULTI PROCESSOR : A multiprocessing operating system allows a computer to use two or more CPUs/CPU cores to execute multiple processes at the same time.
 
-Modern laptop — different CPU cores handle Chrome, video playback, and other tasks.
+Because multiple processes can run in parallel, the system can complete work faster and use the CPU efficiently.
+
+Example
+
+Suppose your computer has 4 CPU cores and you are doing these 4 tasks:
+
+Process 1: Playing a video
+Process 2: Downloading a file
+Process 3: Running a Python program
+Process 4: Listening to music
+
+The OS can distribute these processes across different CPU cores:
+
+CPU Core 1 → Video
+CPU Core 2 → Download
+CPU Core 3 → Python program
+CPU Core 4 → Music
+
+So the tasks can actually execute in parallel.
 
 6. Real-Time OS (RTOS)	Responds to events within a strict time limit.
 
 Car airbag system — detects a crash and deploys the airbag immediately.
-7. Distributed OS	Makes multiple connected computers work together as one system.
 
-Distributed computing system — several computers cooperate to process a large task.
+7. Distributed OS	: A Distributed OS manages multiple computers connected through a network and makes them appear like one single system to the user.
+
+Computer A ─┐
+Computer B ─┼──→ Distributed OS → User sees one system
+Computer C ─┘
+
+Example 1: A distributed computing system where several computers share processing work.
 
 8. Network OS	Manages computers and resources connected through a network.	
 
 Company network — employees access shared files and printers from a server.
 
-9. Mobile Operating System	Designed for smartphones and tablets.	
+9. Mobile Operating System: A Mobile Operating System (Mobile OS) is an operating system designed specifically for mobile devices such as smartphones and tablets.
 
-Android — used on smartphones for apps, calls, camera, etc.
+It manages the device's hardware, applications, memory, storage, network, touch screen, camera, sensors, and battery.
 
-10. Embedded Operating System	Designed for a specific device or dedicated function.
+Example 1: Android 📱
+
+Google's Android is a mobile OS used on phones from companies such as Samsung and OnePlus.
+
+10. Embedded Operating System	: An Embedded Operating System (Embedded OS) is an operating system designed to run on a specific device or machine and perform a specific task or set of tasks.
+
+Unlike a laptop OS, it is usually designed for limited hardware resources such as small memory, low processing power, and low storage.
 
 Washing machine — controls washing, rinsing, spinning, and timing.
 🔥 Easy examples to remember for exams
@@ -49,14 +164,17 @@ Mobile OS → Android
 Embedded OS → Washing machine
 
 Disk Scheduling Algorithms
+
 First: What is Disk Scheduling?
 Definition:
 Disk scheduling is the technique used by the Operating System to decide which disk I/O request should be served first.
 The main purpose is to reduce disk-head movement and improve disk performance.
+
 Real-time example
 Imagine a lift (elevator) in a building.
 People are waiting on floors 2, 5, 8, and 10. The lift must decide which floor to visit first.
 Similarly, a disk has many requests, and the disk head must decide which request to handle first.
+
 1. FCFS — First Come First Serve
 Definition
 Requests are processed in the exact order in which they arrive.
