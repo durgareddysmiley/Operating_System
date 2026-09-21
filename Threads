@@ -557,7 +557,7 @@ We need something that controls:
 
 That's where a semaphore is used.
 
-2. What is a Semaphore?
+2. What is a Semaphore? 
 
 A semaphore is a synchronization mechanism that uses an integer value to control access to shared resources.
 
@@ -1109,6 +1109,38 @@ What is an "unsafe state"?
 Unsafe state = A state where the OS cannot guarantee that all processes will be able to finish without deadlock.
 
 Important: Unsafe does not always mean deadlock has already happened. It means the system is at risk of reaching deadlock.
+
+QUESTION: HOW DOES DEADLOCK AVOIDANCE CHECK WHETHER A RESOURCE ALLOCATION IS SAFE OR NOT?
+
+answer: deadlock avoidance checks whether granting a resource request will leave the system in a safe state or an unsafe state.
+
+it commonly uses the banker's algorithm.
+
+HOW IT WORKS
+
+a process requests resources.
+
+the operating system temporarily assumes it grants the request.
+
+it checks whether all processes can finish in some order using the available resources and the resources they may still need.
+
+if all processes can finish, the state is safe, so the allocation can be granted.
+
+if no safe sequence exists, the state is unsafe, so the operating system does not grant the request yet.
+
+SIMPLE EXAMPLE
+
+suppose there are 3 processes: P1, P2, and P3.
+
+the operating system checks whether there is an order like:
+
+P2 → P1 → P3
+
+if P2 can finish first and release its resources, then P1 can finish, and finally P3 can finish, the system has a safe sequence.
+
+safe state: at least one order exists in which all processes can finish.
+
+unsafe state: no safe sequence exists. it does not mean deadlock has already happened, but deadlock may become possible.
 
 Banker's Algorithm
 
