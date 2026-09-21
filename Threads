@@ -2,7 +2,7 @@ Thread
 
 A thread is the smallest unit of execution inside a process.
 It represents a single sequence of instructions that the CPU executes.
-
+ 
 What does "unit of execution" mean?
 
 Execution = the CPU actually doing the instructions of a program. 
@@ -273,6 +273,7 @@ Completion = 10
 
 TAT = 10 − 2
     = 8
+
 Waiting Time (WT)
 
 Time spent waiting in the Ready Queue.
@@ -316,15 +317,17 @@ CRITICAL SECTIOM PROBLEM
 
 1. What is a Critical Section?
 
-A critical section is the part of a program where a process/thread accesses or modifies shared resources/data.
+A critical section is the part of a program where a process or thread accesses a shared resource.
 
+Only one thread or process should access that shared resource at a time when simultaneous access could cause incorrect results.
 
-Example:
+Simple explanation
 
-Thread 1 ──→ access shared variable X
-Thread 2 ──→ access shared variable X
+Imagine two threads are trying to update the same bank account balance.
 
-The code that accesses X is the critical section.
+If both update it at the same time, the final balance might be incorrect.
+
+So, we protect the part of the code that updates the balance. That protected part is called the critical section.
 
 Simple example
 
@@ -489,6 +492,19 @@ Critical Section
 Multiple threads enter incorrectly
       ↓
 Race Condition
+
+QUESTION: WHEN DO WE USE MUTEX, SEMAPHORE, OR MONITOR — BEFORE A RACE CONDITION HAPPENS OR AFTER?
+
+answer: we use mutex, semaphore, or monitor before a race condition happens, by placing synchronization in the program where processes or threads access shared data.
+
+when multiple threads may access shared data, we protect the critical section using synchronization.
+
+if one thread is already inside the critical section, another thread must wait when the mechanism requires exclusive access.
+
+this prevents conflicting simultaneous updates and helps avoid race conditions.
+
+example: two threads want to update the same bank balance. we use a mutex lock before they access the balance, so they take turns.
+
 7. How do we solve it?
 
 We use synchronization mechanisms.
