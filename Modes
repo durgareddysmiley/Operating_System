@@ -848,7 +848,7 @@ IPC
 ├── Message Queues
 ├── Sockets
 └── Signals
-
+ 
 1. Pipe
 
 Processes communicate through a pipe.
