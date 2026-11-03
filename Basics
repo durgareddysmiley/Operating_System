@@ -163,6 +163,8 @@ Loading program = parking the car in that space.
 
 ## PROCESS CONTROL BLOCK
 
+PCB is a data structure maintained by the Operating System (OS) to store all the important information about a process.
+
 CONTEXT = PROPERTIES 
 When we talk about the properties of a process, they refer to the information that the operating system stores about the process so it can manage it (such as process ID, process state, program counter, registers, etc.).
 
