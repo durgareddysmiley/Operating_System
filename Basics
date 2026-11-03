@@ -138,6 +138,8 @@ Hardware → OS → Program
 PROCESS IS ENTITY  IT IS CREATED BY OS TO EXECUTE THE PROGRAM 
 A process is simply a program that is currently running. 
 
+entity = that has its own existence.
+
 When a program runs, the operating system first reserves some space in RAM (main memory). Then the OS loads the necessary parts of the program, such as 
 instructions and required data, into that reserved memory. After that, the CPU begins executing it, and the program becomes a process.
 
