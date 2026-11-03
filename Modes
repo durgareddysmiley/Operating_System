@@ -40,6 +40,11 @@ OS performs operation
      ↓
 Back to User Mode
 
+Applications run in User Mode, where they have limited permissions and cannot directly access important system resources. Whenever an application needs an OS service, it makes a request through a 
+System Call. Then, the CPU switches from User Mode to Kernel Mode, where the operating system checks the request and performs the required operation. After completing the operation, the OS returns 
+the result to the application, and the CPU switches back to User Mode. This process provides protection and security by preventing applications from directly accessing or damaging the operating system 
+and other processes.
+
 
 CONTEXT SWITCHING — Easy Explanation
 
@@ -190,7 +195,8 @@ Monitor
 
 PAGING 
 
-Paging is a memory management technique.
+Paging is a memory management technique used by the operating system to divide a process's memory into fixed-size blocks called Pages and physical memory (RAM) 
+into fixed-size blocks called Frames. It allows a process to be stored in non-contiguous memory locations, which helps in efficient memory utilization and avoids external fragmentation.
 
 The basic problem is:
 
@@ -332,7 +338,7 @@ One-line memory trick:
 Demand Paging
 Demand paging is a memory management technique used in operating systems where a page (a fixed-size block of memory) is only loaded into the computer's RAM when it is needed, or "demanded" by a process.
 
-How Demand Paging Works:
+How Demand Paging Works: when the some pages are in memory and the process want some page which is not in ram the napge failt occurs then os bring taht demaind page into ram 
 
 When a Program Starts: Initially, only a part of the program (some pages) is loaded into RAM. The rest of the program is stored on the hard drive (secondary memory).
 
@@ -403,7 +409,8 @@ That's internal fragmentation.
 
 
 Thrashing
-Thrashing is a situation in which the operating system spends more time swapping data between RAM (main memory) and the hard drive (secondary memory) than actually executing processes. This happens when there isn't enough physical memory (RAM) to handle the current workload, causing the system to constantly swap pages in and out of memory.
+Thrashing is a situation in which the operating system spends more time swapping data between RAM (main memory) and the hard drive (secondary memory) than actually executing processes. 
+This happens when there isn't enough physical memory (RAM) to handle the current workload, causing the system to constantly swap pages in and out of memory.
 
 Cause
 
